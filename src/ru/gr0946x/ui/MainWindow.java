@@ -23,6 +23,15 @@ public class MainWindow extends JFrame {
         painter = new FractalPainter(mandelbrot, conv);
         mainPanel = new SelectablePanel(painter);
         mainPanel.setBackground(Color.WHITE);
+        mainPanel.addSelectListener((r)->{
+            var xMin = conv.xScr2Crt(r.x);
+            var xMax = conv.xScr2Crt(r.x + r.width);
+            var yMin = conv.yScr2Crt(r.y + r.height);
+            var yMax = conv.yScr2Crt(r.y);
+            conv.setXShape(xMin, xMax);
+            conv.setYShape(yMin, yMax);
+            mainPanel.repaint();
+        });
         setContent();
     }
 
